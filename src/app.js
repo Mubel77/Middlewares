@@ -18,6 +18,9 @@ app.use(cookieParser());
 
 app.use(userLogsMiddleware);
 
+
+
+
 // ************ Template Engine - (don't touch) ************
 app.set('view engine', 'ejs');
 app.set('views', './src/views'); // Seteo de la ubicación de la carpeta "views"
