@@ -5,6 +5,9 @@ const express = require('express');
 const logger = require('morgan');
 const path = require('path');
 
+const userLogsMiddleware = require('./middlewares/userLogs');
+const {middleware,metodo} = require('./middlewares/admin');
+
 // ************ express() - (don't touch) ************
 const app = express();
 
@@ -15,6 +18,12 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(cookieParser());
 
+app.use(userLogsMiddleware);
+app.get("/admin", middleware, metodo);
+
+
+
+
 // ************ Template Engine - (don't touch) ************
 app.set('view engine', 'ejs');
 app.set('views', './src/views'); // Seteo de la ubicación de la carpeta "views"
@@ -23,7 +32,7 @@ app.set('views', './src/views'); // Seteo de la ubicación de la carpeta "views"
 
 // ************ WRITE YOUR CODE FROM HERE ************
 // ************ Route System require and use() ************
-const mainRouter = require('./routes/main');
+const mainRouter = require('./routes/main.js');
 app.use('/', mainRouter);
 
 
